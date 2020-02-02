@@ -7,7 +7,7 @@
     <authors>albertfarhat</authors>
     <owners>albertfarhat</owners>
     <projectUrl>https://github.com/albertfarhat/DotNetApiKeyAuth</projectUrl>
-    <licenseUrl>https://github.com/albertfarhat/DotNetApiKeyAuth/blob/master/LICENSE</licenseUrl>
+    <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Api Key Authorization.</description>
     <releaseNotes></releaseNotes>
