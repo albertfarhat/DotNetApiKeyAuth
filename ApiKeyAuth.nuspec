@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>ApiKeyAuth</id>
+    <version>$version$</version>
+    <title>ApiKeyAuth</title>
+    <authors>albertfarhat</authors>
+    <owners>albertfarhat</owners>
+    <projectUrl>https://github.com/albertfarhat/DotNetApiKeyAuth</projectUrl>
+    <licenseUrl>https://github.com/albertfarhat/DotNetApiKeyAuth/blob/master/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Api Key Authorization.</description>
+    <releaseNotes></releaseNotes>
+    <copyright></copyright>
+    <tags>Api Key Authorization</tags>
+  </metadata>
+  <files>
+    <file src="src\ApiKeyAuth\bin\$target$\netstandard2.0\*.dll" target="lib/netstandard2.0" />
+  </files>
+</package>
