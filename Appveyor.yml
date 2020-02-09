@@ -1,7 +1,13 @@
-version: 1.0.{build}
-image: Visual Studio 2019
+version: '{build}'
+image: Visual Studio 2017
 configuration: Release
-platform: Any CPU
+pull_requests:
+  do_not_increment_build_number: false
+
+nuget:
+  account_feed: false
+  project_feed: false
+  disable_publish_on_pr: true
 
 cache:
   - packages -> **\packages.config
@@ -18,6 +24,20 @@ before_build:
 
 build:
   project: DotNetApiKeyAuth.sln
-  publish_nuget: true
-  verbosity: detailed
-test: off
+
+after_build:
+  - cmd: nuget pack ApiKeyAuth.nuspec -Version "%GitVersion_NuGetVersion%" -Prop "target=%CONFIGURATION%"
+
+artifacts:
+  - path: '*.nupkg'
+    name: NuGet
+
+deploy:
+  - provider: Environment
+    name: PreRelease NuGet Feed
+    on:
+      branch: master
+  - provider: Environment
+    name: Public NuGet Feed
+    on:
+      appveyor_repo_tag: true
