@@ -1,6 +1,18 @@
 version: 1.0.{build}
 image: Visual Studio 2019
 platform: Any CPU
+cache:
+  - packages -> **\packages.config
+
+install:
+  - ps: choco install gitversion.portable -y
+
+assembly_info:
+  patch: true
+
+before_build:
+  - nuget restore DotNetApiKeyAuth.sln
+  - ps: gitversion /l console /output buildserver /updateAssemblyInfo /b $env:APPVEYOR_REPO_BRANCH
 build:
   project: '**/src/ApiKeyAuth.csproj'
   publish_nuget: true
