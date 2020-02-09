@@ -1,6 +1,8 @@
 version: 1.0.{build}
 image: Visual Studio 2019
+configuration: Release
 platform: Any CPU
+
 cache:
   - packages -> **\packages.config
 
@@ -13,8 +15,9 @@ assembly_info:
 before_build:
   - nuget restore DotNetApiKeyAuth.sln
   - ps: gitversion /l console /output buildserver /updateAssemblyInfo /b $env:APPVEYOR_REPO_BRANCH
+
 build:
-  project: '**/src/ApiKeyAuth.csproj'
+  project: DotNetApiKeyAuth.sln
   publish_nuget: true
   verbosity: detailed
 test: off
