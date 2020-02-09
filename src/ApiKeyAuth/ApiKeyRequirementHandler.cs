@@ -11,8 +11,6 @@ namespace ApiKeyAuth
 {
     public class ApiKeyRequirementHandler : AuthorizationHandler<ApiKeyRequirement>
     {
-        public const string API_KEY_HEADER_NAME = "X-API-KEY";
-
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ApiKeyRequirement requirement)
         {
             ValidateApiKey(context, requirement);
@@ -23,11 +21,17 @@ namespace ApiKeyAuth
         {
             if (context.Resource is AuthorizationFilterContext authorizationFilterContext)
             {
-                var apiKey = authorizationFilterContext.HttpContext.Request.Headers[API_KEY_HEADER_NAME].FirstOrDefault();
+                var apiKey = authorizationFilterContext.
+                    HttpContext
+                    .Request
+                    .Headers[GlobalSettings.HeaderKey]
+                    .FirstOrDefault();
                 if (apiKey == null)
                 {
                     var authFilterContext = context.Resource as AuthorizationFilterContext;
-                    authFilterContext.Result = new RedirectToActionResult("NotAuthorized", "Auth", null);
+                    authFilterContext.Result = new RedirectToActionResult(
+                        GlobalSettings.NoApiKeyAction, 
+                        GlobalSettings.AuthController, null);
                     context.Succeed(requirement);
                 }
                 else
@@ -38,7 +42,9 @@ namespace ApiKeyAuth
                 else
                 {
                     var authFilterContext = context.Resource as AuthorizationFilterContext;
-                    authFilterContext.Result = new RedirectToActionResult("NotAuthorized", "Auth", null);
+                    authFilterContext.Result = new RedirectToActionResult(
+                        GlobalSettings.NotAuthorizedAction,
+                        GlobalSettings.AuthController, null);
                     context.Succeed(requirement);
                 }
             }
