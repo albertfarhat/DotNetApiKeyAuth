@@ -24,7 +24,7 @@ before_build:
   - ps: gitversion /l console /output buildserver /updateAssemblyInfo /b $env:APPVEYOR_REPO_BRANCH
 
 build:
-   project: ./src/ApiKeyAuth/ApiKeyAuth.csproj
+   project: DotNetApiKeyAuth.sln
  - verbosity: detailed
  - cmd: dotnet pack ./src/ApiKeyAuth/ApiKeyAuth.csproj
 
