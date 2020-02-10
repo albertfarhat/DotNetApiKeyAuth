@@ -20,7 +20,7 @@ assembly_info:
 
 before_build:
   - cmd: dotnet --version
-  - nuget restore ./src/ApiKeyAuth/ApiKeyAuth.csproj
+  - nuget restore DotNetApiKeyAuth.sln
   - ps: gitversion /l console /output buildserver /updateAssemblyInfo /b $env:APPVEYOR_REPO_BRANCH
 
 build:
