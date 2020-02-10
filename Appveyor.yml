@@ -19,11 +19,12 @@ assembly_info:
   patch: true
 
 before_build:
-  - nuget restore DotNetApiKeyAuth.sln
+  - cmd: dotnet --version
+  - nuget restore ./src/ApiKeyAuth/ApiKeyAuth.csproj
   - ps: gitversion /l console /output buildserver /updateAssemblyInfo /b $env:APPVEYOR_REPO_BRANCH
 
 build:
-  project: DotNetApiKeyAuth.sln
+ - cmd: dotnet pack ./src/ApiKeyAuth/ApiKeyAuth.csproj
 
 after_build:
   - cmd: nuget pack ApiKeyAuth.nuspec -Version "%GitVersion_NuGetVersion%" -Prop "target=%CONFIGURATION%"
@@ -31,13 +32,7 @@ after_build:
 artifacts:
   - path: '*.nupkg'
     name: NuGet
-
-deploy:
-  - provider: Environment
-    name: PreRelease NuGet Feed
-    on:
-      branch: master
-  - provider: Environment
-    name: Public NuGet Feed
-    on:
-      appveyor_repo_tag: true
+clone_depth: 1
+on_finish :
+  # any cleanup in here
+deploy: off
