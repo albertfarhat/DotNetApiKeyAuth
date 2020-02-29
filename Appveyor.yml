@@ -15,7 +15,7 @@ dotnet_csproj:
 before_build:
 - ps: dotnet restore
 build:
-  project: '**/src/ApiKeyAuth.csproj'
+  project: '**/src/ApiKeyAuth/ApiKeyAuth.csproj'
   publish_nuget: true
   parallel: true
   verbosity: detailed
