@@ -1,23 +1,18 @@
-version: '0.1.2-beta-{build}'
+version: 1.0.{build}
+image: Visual Studio 2019
+configuration: Release
 platform: Any CPU
-configuration: Release
-
-image: Visual Studio 2017
-configuration: Release
-pull_requests:
-  do_not_increment_build_number: false
-
-cache:
-  - packages -> **\packages.config
-
-install:
-  - ps: choco install gitversion.portable -y
-
-assembly_info:
+dotnet_csproj:
   patch: true
-
-before_build:
-  - dotnet restore DotNetApiKeyAuth.sln
-  - dotnet restore .\tests\ApiKeyAuth.Tests
+  file: '**\*.csproj'
+  version: '{version}'
+  version_prefix: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
 build:
-  project: DotNetApiKeyAuth.sln
+  publish_nuget: true
+  parallel: true
+  verbosity: detailed
+test: off
