@@ -26,7 +26,7 @@ build:
   project: DotNetApiKeyAuth.sln
 
 after_build:
-  - cmd: nuget pack ApiKeyAuth.nuspec -Version "%GitVersion_NuGetVersion%" -Prop "target=%CONFIGURATION%"
+  - cmd: dotnet pack ".\src\ApiKeyAuth\ApiKeyAuth.csproj" -c %CONFIGURATION% -o ..\artifacts
 
 artifacts:
   - path: '*.nupkg'
