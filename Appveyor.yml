@@ -1,8 +1,5 @@
 version: 1.0.{build}
 image: Visual Studio 2019
-configuration: Release
-platform: Any CPU
-
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
@@ -15,7 +12,7 @@ dotnet_csproj:
 before_build:
 - ps: dotnet restore
 build:
-  project: '**/src/ApiKeyAuth/ApiKeyAuth.csproj'
+  project: '**/ApiKeyAuth.csproj'
   publish_nuget: true
   parallel: true
   verbosity: detailed
