@@ -12,13 +12,11 @@ dotnet_csproj:
   assembly_version: '{version}'
   file_version: '{version}'
   informational_version: '{version}'
-
 before_build:
-  - dotnet restore  
-
+- ps: dotnet restore
 build:
+  project: '**/src/ApiKeyAuth.csproj'
   publish_nuget: true
   parallel: true
   verbosity: detailed
-
 test: off
