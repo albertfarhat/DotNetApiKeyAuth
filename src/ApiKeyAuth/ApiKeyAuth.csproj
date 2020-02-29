@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Company>Albert Farhat</Company>
+    <Version>1.0.1</Version>
+    <Description>Add API Key authorization to API projects</Description>
   </PropertyGroup>
 
   <ItemGroup>
