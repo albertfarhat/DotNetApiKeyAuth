@@ -10,6 +10,7 @@ Install-Package ApiKeyAuth
 ## Usage
 
 ```cs
+        Statrup.cs 
         using ApiKeyAuth;
         public void ConfigureServices(IServiceCollection services)
         {           
@@ -17,9 +18,17 @@ Install-Package ApiKeyAuth
             services.AddMvc()              
                 .AddApplicationPart(typeof(ApiKeyAuth.ServicesConfiguration).Assembly);               
         }
+```
 
-        Controller Actions:
-        Add [Authorize(Policy = "ApiKeyPolicy")]
+```cs
+        Controller:
+
+        [HttpGet]
+        [Authorize(Policy = "ApiKeyPolicy")]
+        public ActionResult<IEnumerable<string>> Get()
+        {
+            return new string[] { "value1", "value2" };
+        }
 
 ```
 
