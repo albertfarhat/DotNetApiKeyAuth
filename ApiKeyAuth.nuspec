@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>ApiKeyAuth</id>
-    <version>$version$</version>
+    <version>1.0.0</version>
     <title>ApiKeyAuth</title>
     <authors>albertfarhat</authors>
     <owners>albertfarhat</owners>
